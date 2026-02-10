@@ -1,0 +1,28 @@
+{% extends 'medical/base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 4rem auto; text-align: center; border: 2px solid var(--primary);">
+    <h2 style="margin-bottom: 0.5rem; color: var(--primary);">Patient Verification</h2>
+    <p class="mb-4">Enter your Adhaar number to proceed with booking.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group" style="text-align: left;">
+            <label>Adhaar No</label>
+            <input type="text" name="idno" maxlength="12" required pattern="\d{12}" placeholder="Enter 12 digit number"
+                style="font-size: 1.2rem; letter-spacing: 2px;">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+            Proceed to Booking →
+        </button>
+    </form>
+
+    <div style="margin-top: 2rem; border-top: 1px solid var(--glass-border); padding-top: 1rem;">
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+            New Patient? <a href="{% url 'register' %}" style="color: var(--secondary); font-weight: 600;">Register
+                Here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

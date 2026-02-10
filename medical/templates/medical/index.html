@@ -1,0 +1,49 @@
+{% extends 'medical/base.html' %}
+
+{% block content %}
+<section class="hero">
+    <h1><span style="color: var(--primary);">WELCOME TO</span> CHIKITSAONE</h1>
+    <p class="subtitle">Next-Generation Medical Management & Patient Care</p>
+
+    <div
+        style="margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6; color: var(--text-muted);">
+        <p>
+            Experience the future of healthcare with ChikitsaOne's state-of-the-art digital management system.
+            Streamline appointments, access medical records securely, and connect with top specialists instantly.
+        </p>
+    </div>
+
+    <div class="grid-menu">
+        <div class="card">
+            <h3>Register Patient</h3>
+            <p>New to ChikitsaOne? Create your profile to get started.</p>
+            <a href="{% url 'register' %}" class="btn btn-primary">Start Here →</a>
+        </div>
+        <div class="card">
+            <h3>Book Appointment</h3>
+            <p>Schedule a visit with our top specialists.</p>
+            <a href="{% url 'appointment_search' %}" class="btn btn-primary">Schedule Now →</a>
+        </div>
+        <div class="card">
+            <h3>Find Doctors</h3>
+            <p>Browse our directory of experienced practitioners.</p>
+            <a href="{% url 'doctor_list' %}" class="btn btn-primary">View Doctors →</a>
+        </div>
+        <div class="card">
+            <h3>Services</h3>
+            <p>Explore our cutting-edge medical facilities.</p>
+            <a href="{% url 'service_list' %}" class="btn btn-primary">Our Services →</a>
+        </div>
+        <div class="card">
+            <h3>Update Profile</h3>
+            <p>Refine your personal data and keep records current.</p>
+            <a href="{% url 'update_patient_search' %}" class="btn btn-outline">Update Data →</a>
+        </div>
+        <div class="card">
+            <h3>Hospital Records</h3>
+            <p>Secure access to the complete patient registry.</p>
+            <a href="{% url 'all_records' %}" class="btn btn-outline">View Registry →</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

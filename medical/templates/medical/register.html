@@ -1,0 +1,70 @@
+{% extends 'medical/base.html' %}
+
+{% block content %}
+<div
+    style="max-width: 650px; margin: 0 auto; background: var(--glass-bg); padding: 3rem; border-radius: 20px; border: 1px solid var(--glass-border);">
+    <h2 class="text-center" style="margin-bottom: 0.5rem;">New Patient Registration</h2>
+    <p class="text-center" style="color: var(--text-muted); margin-bottom: 2rem;">Join ChikitsaOne for seamless
+        healthcare management.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group" style="grid-column: span 2;">
+                <label>Adhaar No (12 digits)</label>
+                <input type="text" name="idno" maxlength="12" required placeholder="Ex: 123412341234" pattern="\d{12}"
+                    title="Must be 12 digits">
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+                <label>Full Name</label>
+                <input type="text" name="name" maxlength="20" required placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" name="age" required min="0" max="150" placeholder="Ex: 25">
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <select name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" maxlength="10" required placeholder="Ex: 9876543210" pattern="\d{10}">
+            </div>
+
+            <div class="form-group">
+                <label>Blood Group</label>
+                <select name="bg" required>
+                    <option value="" disabled selected>Select Group</option>
+                    <option value="A+">A+</option>
+                    <option value="B+">B+</option>
+                    <option value="O+">O+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="A-">A-</option>
+                    <option value="B-">B-</option>
+                    <option value="O-">O-</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                Register Profile
+            </button>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                <a href="{% url 'home' %}" style="color: var(--text-muted);">Cancel and Return</a>
+            </p>
+        </div>
+    </form>
+</div>
+{% endblock %}

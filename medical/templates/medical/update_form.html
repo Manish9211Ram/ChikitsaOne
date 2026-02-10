@@ -1,0 +1,67 @@
+{% extends 'medical/base.html' %} 
+
+{% block content %}
+<!-- Spaces REALLY fixed via Python script -->
+<div class="card"
+    style="max-width: 600px; margin: 0 auto; background: var(--glass-bg); padding: 3rem; border: 1px solid var(--accent);">
+    <h2 class="text-center" style="margin-bottom: 2rem; color: var(--accent);">Edit Patient Profile</h2>
+
+    <div
+        style="text-align: center; margin-bottom: 2rem; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px;">
+        <span style="color: var(--text-muted); font-size: 0.9rem;">ADHAAR ID (LOCKED)</span>
+        <p style="font-family: monospace; font-size: 1.2rem; color: var(--text-main);">{{ patient.idno }}</p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="form-group" style="grid-column: span 2;">
+                <label>Full Name</label>
+                <input type="text" name="name" maxlength="20" value="{{ patient.name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Age</label>
+                <input type="number" name="age" value="{{ patient.age }}" required min="0" max="150">
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <select name="gender" required>
+                    <option value="M" {% if patient.gender == 'M' %}selected{% endif %}>Male</option>
+                    <option value="F" {% if patient.gender == 'F' %}selected{% endif %}>Female</option>
+                    <option value="O" {% if patient.gender == 'O' %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" maxlength="10" value="{{ patient.phone }}" required pattern="\d{10}">
+            </div>
+
+            <div class="form-group">
+                <label>Blood Group</label>
+                <select name="bg" required>
+                    <option value="A+" {% if patient.bg == 'A+' %}selected{% endif %}>A+</option>
+                    <option value="B+" {% if patient.bg == 'B+' %}selected{% endif %}>B+</option>
+                    <option value="O+" {% if patient.bg == 'O+' %}selected{% endif %}>O+</option>
+                    <option value="AB+" {% if patient.bg == 'AB+' %}selected{% endif %}>AB+</option>
+                    <option value="A-" {% if patient.bg == 'A-' %}selected{% endif %}>A-</option>
+                    <option value="B-" {% if patient.bg == 'B-' %}selected{% endif %}>B-</option>
+                    <option value="O-" {% if patient.bg == 'O-' %}selected{% endif %}>O-</option>
+                    <option value="AB-" {% if patient.bg == 'AB-' %}selected{% endif %}>AB-</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+            <a href="{% url 'home' %}" class="btn btn-outline"
+                style="flex: 1; text-align: center; justify-content: center;">Cancel</a>
+            <button type="submit" class="btn btn-primary"
+                style="flex: 2; border: none; background: var(--accent); color: white; justify-content: center;">
+                Save Changes 💾
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

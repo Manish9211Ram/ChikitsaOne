@@ -1,0 +1,33 @@
+{% extends 'medical/base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 0 auto; text-align: left; border: 2px solid var(--primary);">
+    <h2 style="margin-bottom: 2rem;">Select Specialist Department</h2>
+    <p class="mb-4">Choose the department for your consultation. We will assign the best available doctor.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Available Departments</label>
+            <select name="department" required style="font-size: 1.1rem; padding: 1.2rem;">
+                <option value="" disabled selected>— Select Department —</option>
+                {% for dept in departments %}
+                <option value="{{ dept }}">{{ dept }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary"
+            style="width: 100%; justify-content: center; margin-top: 2rem; font-size: 1.1rem;">
+            Confirm Booking
+        </button>
+    </form>
+
+    <p style="margin-top: 1.5rem; text-align: center;">
+        <a href="{% url 'home' %}" class="btn btn-outline"
+            style="border: none; color: var(--text-muted); font-size: 0.9rem;">
+            ← Cancel Booking
+        </a>
+    </p>
+</div>
+{% endblock %}

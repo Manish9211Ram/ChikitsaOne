@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChikitsaOne | Advanced Medical Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="glass-container">
+        <header>
+            <a href="{% url 'home' %}" class="brand">
+                ChikitsaOne
+            </a>
+            <nav>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'register' %}">Register</a>
+                <a href="{% url 'appointment_search' %}">Book Appt</a>
+                <a href="{% url 'doctor_list' %}">Doctors</a>
+                <a href="{% url 'service_list' %}">Services</a>
+                <a href="{% url 'doctor_login' %}" style="color: var(--secondary);">Provider Login</a>
+            </nav>
+        </header>
+
+        {% if quote %}
+        <div class="quote-box"
+            style="margin-bottom: 2rem; background: rgba(0, 242, 255, 0.05); padding: 1.5rem; border-left: 3px solid var(--primary);">
+            <p style="font-size: 1.1rem; margin: 0;">"{{ quote }}"</p>
+        </div>
+        {% endif %}
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+        <footer>
+            <div class="footer-content"
+                style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                <div class="time-box">
+                    <p style="font-size: 0.8rem; opacity: 0.7;">{{ date|date:"l, d F Y" }}</p>
+                    <p style="font-weight: 600;">{{ time|time:"H:i" }}</p>
+                </div>
+
+                <div style="text-align: right;">
+                    <p>&copy; 2026 ChikitsaOne Systems</p>
+                    <p style="font-size: 0.8rem; opacity: 0.5;">Secure Medical Architecture</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div id="three-bg-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="{% static 'js/three_bg.js' %}"></script>
+</body>
+
+</html>

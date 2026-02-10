@@ -1,0 +1,57 @@
+{% extends 'medical/base.html' %}
+
+{% block content %}
+<section>
+    <div
+        style="background: linear-gradient(135deg, var(--secondary), var(--glass-bg)); padding: 2rem; border-radius: 16px; margin-bottom: 3rem;">
+        <h1 style="font-size: 2.5rem; margin-bottom: 0;">{{ doctor.name }}</h1>
+        <p style="font-size: 1.2rem; color: #fff; opacity: 0.9;">{{ doctor.department }} Specialist • Room {{
+            doctor.room_no }}</p>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2>Today's Appointments</h2>
+        <a href="{% url 'home' %}" class="btn btn-outline" style="font-size: 0.9rem;">
+            ← Logout
+        </a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Apt No</th>
+                    <th style="width: 25%;">Patient Name</th>
+                    <th style="width: 10%;">Age</th>
+                    <th style="width: 10%;">Gender</th>
+                    <th style="width: 20%;">Date</th>
+                    <th style="width: 15%;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appt in appointments %}
+                <tr>
+                    <td style="color: var(--secondary); font-weight: 700;">#{{ appt.appointment_no }}</td>
+                    <td style="font-weight: 500;">{{ appt.patient.name }}</td>
+                    <td>{{ appt.patient.age }}</td>
+                    <td>{{ appt.patient.gender }}</td>
+                    <td>{{ appt.date }}</td>
+                    <td>
+                        <span class="badge badge-{{ appt.status|lower }}"
+                            style="padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; background: var(--glass-bg);">
+                            {{ appt.status }}
+                        </span>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                        No appointments scheduled for today.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
